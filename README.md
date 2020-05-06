@@ -45,6 +45,7 @@
 #### 2.1 安装Docker
 
 ##### 2.2.1 使用阿里云镜像源安装
+[参考链接](https://developer.aliyun.com/mirror/docker-ce "Docker CE 镜像")
 
     # step 1: 安装必要的一些系统工具
     sudo yum install -y yum-utils device-mapper-persistent-data lvm2
@@ -101,7 +102,7 @@
 
 ### 3. 配置*Docker*
 #### 3.1 配置Docker
-
+> [docker docs](https://docs.docker.com/reference/ "docker docs")
 
 
 ### 4. 安装*Portainer*
@@ -178,3 +179,30 @@
 
 ### 5. 配置*Portainer*
 #### 5.1 配置Portainer
+##### 5.1.2 Images
+左侧列表选择Images
+DockerHub镜像地址  
+https://hub.docker.com/search?type=image  
+根据Tags中的版本，下载对应镜像，如输入：mariadb:latest
+
+
+### 6. 使用*Portainer*快速部署
+#### 6.1 MariaDB
+Containers->Add container  
+
+Name：容器名  
+
+Image configuration  
+> Registry：DockerHub  
+> Image：mariadb:latest  
+
+Network ports configuration  
+Manual network port publishing->publish a new network port  
+> host：外部访问端口，container：3306  
+
+Advanced container settings  
+Env  
+Environment variables->add environment variable
+> name：MYSQL_ROOT_PASSWORD，value：默认root密码
+
+点击Deploy the container（确保firewall处于运行状态）
