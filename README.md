@@ -206,3 +206,53 @@ Environment variables->add environment variable
 > name：MYSQL_ROOT_PASSWORD，value：默认root密码
 
 点击Deploy the container（确保firewall处于运行状态）
+
+#### 6.2 MySQL
+Containers->Add container  
+
+Name：容器名  
+
+Image configuration  
+> Registry：DockerHub  
+> Image：mysql:latest  
+
+Network ports configuration  
+Manual network port publishing->publish a new network port  
+> host：外部访问端口，container：3306  
+
+Advanced container settings  
+Env  
+Environment variables->add environment variable
+> name：MYSQL_ROOT_PASSWORD，value：默认root密码
+
+点击Deploy the container（确保firewall处于运行状态）
+
+#### 6.2 Redis
+Containers->Add container  
+
+Name：容器名  
+
+Image configuration  
+> Registry：DockerHub  
+> Image：redis:latest  
+
+Network ports configuration  
+Manual network port publishing->publish a new network port  
+> host：外部访问端口，container：6379  
+
+点击Deploy the container（确保firewall处于运行状态）
+
+#### 6.2 MongoDB
+Containers->Add container  
+
+Name：容器名  
+
+Image configuration  
+> Registry：DockerHub  
+> Image：mongo:latest  
+
+Network ports configuration  
+Manual network port publishing->publish a new network port  
+> host：外部访问端口，container：27017  
+
+点击Deploy the container（确保firewall处于运行状态）
