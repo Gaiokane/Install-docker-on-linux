@@ -256,3 +256,37 @@ Manual network port publishing->publish a new network port
 > host：外部访问端口，container：27017  
 
 点击Deploy the container（确保firewall处于运行状态）
+
+#### 6.2 WordPress
+以Stack形式配置
+db配置ports块后会起不来，可以一开始不配置，后期指定
+
+    version: '2'
+
+    services:
+    db:
+        image: mysql:5.7
+        ports:
+        - 91:3306
+        volumes:
+        - db_data:/var/lib/mysql
+        restart: always
+        environment:
+        MYSQL_ROOT_PASSWORD: qwerasdf
+        MYSQL_DATABASE: wordpressnb
+        MYSQL_USER: wordpress
+        MYSQL_PASSWORD: wordpress123
+
+    wordpress:
+        image: wordpress:latest
+        ports:
+        - 92:80
+        restart: always
+        environment:
+        WORDPRESS_DB_HOST: db:3306
+        WORDPRESS_DB_USER: wordpress
+        WORDPRESS_DB_PASSWORD: wordpress123
+        WORDPRESS_DB_NAME: wordpressnb
+
+    volumes:
+        db_data:
