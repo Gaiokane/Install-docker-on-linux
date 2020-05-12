@@ -202,6 +202,7 @@ https://hub.docker.com/search?type=image
 
 ### 6. 使用*Portainer*快速部署
 #### 6.1 MariaDB
+拉取镜像（mariadb:latest）
 Containers->Add container  
 
 Name：容器名  
@@ -222,6 +223,7 @@ Environment variables->add environment variable
 点击Deploy the container（确保firewall处于运行状态）
 
 #### 6.2 MySQL
+拉取镜像（mysql:5.7）
 Containers->Add container  
 
 Name：容器名  
@@ -241,7 +243,8 @@ Environment variables->add environment variable
 
 点击Deploy the container（确保firewall处于运行状态）
 
-#### 6.2 Redis
+#### 6.3 Redis
+拉取镜像（redis:latest）
 Containers->Add container  
 
 Name：容器名  
@@ -256,7 +259,8 @@ Manual network port publishing->publish a new network port
 
 点击Deploy the container（确保firewall处于运行状态）
 
-#### 6.2 MongoDB
+#### 6.4 MongoDB
+拉取镜像（mongo:lates）
 Containers->Add container  
 
 Name：容器名  
@@ -271,9 +275,9 @@ Manual network port publishing->publish a new network port
 
 点击Deploy the container（确保firewall处于运行状态）
 
-#### 6.2 WordPress
+#### 6.5 WordPress
 以Stack形式配置
-db配置ports块后会起不来，可以一开始不配置，后期指定
+首先拉取mysql（mysql:5.7）和wordpress（wordpress:latest）镜像
 
 ````yml
 version: "2.4"
@@ -286,7 +290,7 @@ services:
     volumes:
       - finallywordpress_data:/var/lib/mysql
     restart: always
-    #container_name: mysql#指定容器名
+    #container_name: mysql #指定容器名
     environment:
       MYSQL_ROOT_PASSWORD: mysqlrootpwd
       MYSQL_DATABASE: db_wordpress
@@ -301,14 +305,14 @@ services:
     #链接到该容器
     links:
       - mysql
-      #- mysql:wordpressmysql#设置别名
+      #- mysql:wordpressmysql #设置别名
     ports:
       - "92:80"
     volumes:
       #将容器内容的目录挂在到外部（：左边同volumes中一样，右边容器中路径）
       - wordpress_data:/var/www/html
     restart: always
-    #container_name: wordpress#指定容器名
+    #container_name: wordpress #指定容器名
     environment:
       #WORDPRESS_DB_HOST: wordpressmysql:3306#使用别名，端口需为内部端口号
       WORDPRESS_DB_HOST: mysql:3306
@@ -320,3 +324,38 @@ volumes:
   finallywordpress_data:
   wordpress_data:
 ````
+
+#### 6.6 Microsoft SQLServer 2017
+https://hub.docker.com/r/microsoft/mssql-server-linux  
+https://docs.microsoft.com/zh-cn/sql/linux/quickstart-install-connect-docker?view=sql-server-ver15&pivots=cs1-bash  
+拉取镜像（microsoft/mssql-server-linux:latest）
+Containers->Add container  
+
+Name：容器名  
+
+Image configuration  
+> Registry：DockerHub  
+> Image：microsoft/mssql-server-linux:latest  
+
+Network ports configuration  
+Manual network port publishing->publish a new network port  
+> host：外部访问端口，container：1433  
+
+Advanced container settings  
+Env  
+Environment variables->add environment variable  
+#同意协议，必填
+> name：ACCEPT_EULA，value：Y
+> 
+#密码的长度必须至少为 8 个字符，并且必须包含以下四种字符中的三种：大写字母、小写字母、十进制数字和符号，必填
+> name：SA_PASSWORD，value：<YourStrong@Passw0rd\>
+
+点击Deploy the container（确保firewall处于运行状态）
+
+#### 6.7 gitlab
+https://hub.docker.com/r/gitlab/gitlab-ce  
+拉取镜像（gitlab/gitlab-ce:latest）
+
+#### 6.8 jenkins
+https://hub.docker.com/_/jenkins?tab=description  
+拉取镜像（jenkins:latest）
