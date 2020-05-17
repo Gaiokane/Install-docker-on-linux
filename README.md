@@ -325,7 +325,7 @@ volumes:
   wordpress_data:
 ````
 
-#### 6.6 Microsoft SQLServer 2017
+#### 6.6 Microsoft SQLServer Linux(2017)
 https://hub.docker.com/r/microsoft/mssql-server-linux  
 https://docs.microsoft.com/zh-cn/sql/linux/quickstart-install-connect-docker?view=sql-server-ver15&pivots=cs1-bash  
 拉取镜像（microsoft/mssql-server-linux:latest）
@@ -352,10 +352,68 @@ Environment variables->add environment variable
 
 点击Deploy the container（确保firewall处于运行状态）
 
-#### 6.7 gitlab
+注意：使用Navicat连接mssql时，如有指定端口，主机需填成：ip,端口
+
+#### 6.7 Microsoft SQLServer 2017
+https://hub.docker.com/_/microsoft-mssql-server  
+拉取镜像（mcr.microsoft.com/mssql/server:2017-latest）
+Containers->Add container  
+
+Name：容器名  
+
+Image configuration  
+> Registry：mcr.microsoft.com（在Registries中新增一个，URL：mcr.microsoft.com）  
+> Image：mssql/server:2017-latest  
+
+Network ports configuration  
+Manual network port publishing->publish a new network port  
+> host：外部访问端口，container：1433  
+
+Advanced container settings  
+Env  
+Environment variables->add environment variable  
+#同意协议，必填
+> name：ACCEPT_EULA，value：Y
+> 
+#密码的长度必须至少为 8 个字符，并且必须包含以下四种字符中的三种：大写字母、小写字母、十进制数字和符号，必填
+> name：SA_PASSWORD，value：<YourStrong@Passw0rd\>
+
+点击Deploy the container（确保firewall处于运行状态）
+
+注意：使用Navicat连接mssql时，如有指定端口，主机需填成：ip,端口
+
+#### 6.8 Microsoft SQLServer 2019
+https://hub.docker.com/_/microsoft-mssql-server  
+拉取镜像（mcr.microsoft.com/mssql/server:2019-latest）
+Containers->Add container  
+
+Name：容器名  
+
+Image configuration  
+> Registry：mcr.microsoft.com（在Registries中新增一个，URL：mcr.microsoft.com）  
+> Image：mssql/server:2019-latest  
+
+Network ports configuration  
+Manual network port publishing->publish a new network port  
+> host：外部访问端口，container：1433  
+
+Advanced container settings  
+Env  
+Environment variables->add environment variable  
+#同意协议，必填
+> name：ACCEPT_EULA，value：Y
+> 
+#密码的长度必须至少为 8 个字符，并且必须包含以下四种字符中的三种：大写字母、小写字母、十进制数字和符号，必填
+> name：SA_PASSWORD，value：<YourStrong@Passw0rd\>
+
+点击Deploy the container（确保firewall处于运行状态）
+
+注意：使用Navicat连接mssql时，如有指定端口，主机需填成：ip,端口
+
+#### 6.9 gitlab
 https://hub.docker.com/r/gitlab/gitlab-ce  
 拉取镜像（gitlab/gitlab-ce:latest）
 
-#### 6.8 jenkins
+#### 6.10 jenkins
 https://hub.docker.com/_/jenkins?tab=description  
 拉取镜像（jenkins:latest）
