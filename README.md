@@ -416,4 +416,23 @@ https://hub.docker.com/r/gitlab/gitlab-ce
 
 #### 6.10 jenkins
 https://hub.docker.com/_/jenkins?tab=description  
-拉取镜像（jenkins:latest）
+拉取镜像（jenkins:latest）  
+Containers->Add container  
+
+Name：容器名  
+
+Image configuration  
+> Registry：DockerHub  
+> Image：jenkins/jenkins:lts  
+
+Network ports configuration  
+Manual network port publishing->publish a new network port  
+> host：外部访问端口，container：8080  
+> host：外部访问端口，container：50000  
+
+Advanced container settings  
+Volumes  
+Volume mapping->+map additional volume  
+> container：/var/jenkins_home，volume：选择新建的Volume #需提前新建
+
+点击Deploy the container（确保firewall处于运行状态）
