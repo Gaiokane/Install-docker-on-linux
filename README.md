@@ -415,8 +415,21 @@ https://hub.docker.com/r/gitlab/gitlab-ce
 拉取镜像（gitlab/gitlab-ce:latest）
 
 #### 6.10 jenkins
-https://hub.docker.com/_/jenkins?tab=description  
-拉取镜像（jenkins:latest）  
+https://hub.docker.com/r/jenkins/jenkins  
+> 长期支持版本 (LTS)：jenkins/jenkins:lts  
+> LTS (长期支持) 版本每12周从常规版本流中选择，作为该时间段的稳定版本。  
+> 
+> 每周更新版：jenkins/jenkins  
+> 每周都会发布一个新版本，为用户和插件开发人员提供错误修复和功能。
+
+新建数据卷
+Volumes->Add volume
+
+> Name：数据卷名
+
+点击Create the volume
+
+拉取镜像（jenkins/jenkins:lts）  
 Containers->Add container  
 
 Name：容器名  
@@ -433,6 +446,38 @@ Manual network port publishing->publish a new network port
 Advanced container settings  
 Volumes  
 Volume mapping->+map additional volume  
-> container：/var/jenkins_home，volume：选择新建的Volume #需提前新建
+> container：/var/jenkins_home，volume：选择之前新建的Volume #需提前新建
 
-点击Deploy the container（确保firewall处于运行状态）
+点击Deploy the container（确保firewall处于运行状态）  
+
+浏览器打开ip:端口（容器内8080对应的外部端口）  
+
+FAQ：  
+> 问：  
+> 打开Jenkins一直显示“Please wait while Jenkins is getting ready to work”的解决办法  
+> 答：  
+> 网络问题导致  
+> 打开Volumes，复制之前新建Jenkins volume对应的Mount point，此处以/var/lib/docker/volumes/jenkins_data/_data为例  
+> ssh进宿主机  
+> ```
+> vim /var/lib/docker/volumes/jenkins_data/_data/hudson.model.UpdateCenter.xml  
+> ```
+> 将第五行中的地址替换成：  
+> ````
+> https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json  
+> ````
+> 保存、退出、在Containers中重启容器  
+> 浏览器重新打开Jenkins显示登录页面  
+> 密码可以通过Containers->容器对应Quick actions下Logs中查看，在Please use the following password to proceed to installation:下面一行；或通过Containers->容器对应Quick actions下Exec Console->点击Connect，输入cat /var/jenkins_home/secrets/initialAdminPassword 查看密码  
+
+> 问：  
+> Jenkins下载插件过慢  
+> 答：  
+> 打开Volumes，复制之前新建Jenkins volume对应的Mount point，此处以/var/lib/docker/volumes/jenkins_data/_data为例  
+> ssh进宿主机  
+> ```
+> cd /var/lib/docker/volumes/jenkins_data/_data/updates/  
+> 
+> sed -i 's/http:\/\/updates.jenkins-ci.org\/download/https:\/\/mirrors.tuna.tsinghua.edu.cn\/jenkins/g' default.json && sed -i 's/http:\/\/www.google.com/https:\/\/www.baidu.com/g' default.json
+> ```
+> 保存、退出、在Containers中重启容器  
