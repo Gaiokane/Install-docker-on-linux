@@ -422,12 +422,12 @@ https://hub.docker.com/r/jenkins/jenkins
 > 每周更新版：jenkins/jenkins  
 > 每周都会发布一个新版本，为用户和插件开发人员提供错误修复和功能。
 
-新建数据卷
-Volumes->Add volume
+新建数据卷  
+Volumes->Add volume  
 
-> Name：数据卷名
+> Name：数据卷名  
 
-点击Create the volume
+点击Create the volume  
 
 拉取镜像（jenkins/jenkins:lts）  
 Containers->Add container  
@@ -481,3 +481,34 @@ FAQ：
 > sed -i 's/http:\/\/updates.jenkins-ci.org\/download/https:\/\/mirrors.tuna.tsinghua.edu.cn\/jenkins/g' default.json && sed -i 's/http:\/\/www.google.com/https:\/\/www.baidu.com/g' default.json
 > ```
 > 保存、退出、在Containers中重启容器  
+
+#### 6.11 Caddy
+https://hub.docker.com/_/caddy  
+
+新建数据卷  
+Volumes->Add volume  
+
+> Name：数据卷名  
+
+点击Create the volume，需要建两个，一个data，一个config  
+
+拉取镜像（caddy:latest）
+Containers->Add container  
+
+Name：容器名  
+
+Image configuration  
+> Registry：DockerHub  
+> Image：caddy:latest  
+
+Network ports configuration  
+Manual network port publishing->publish a new network port  
+> host：外部访问端口，container：80  
+
+Advanced container settings  
+Volumes  
+Volume mapping->+map additional volume  
+> container：/usr/share/caddy，volume：选择之前新建的Volume #需提前新建  
+> container：/config，volume：选择之前新建的Volume #需提前新建  
+
+点击Deploy the container（确保firewall处于运行状态）
