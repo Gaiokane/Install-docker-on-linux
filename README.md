@@ -512,3 +512,22 @@ Volume mapping->+map additional volume
 > container：/config，volume：选择之前新建的Volume #需提前新建  
 
 点击Deploy the container（确保firewall处于运行状态）
+
+#### 6.12 CentOS7
+https://hub.docker.com/_/centos  
+拉取镜像（centos:centos7）
+Containers->Add container  
+
+Name：容器名  
+
+Image configuration  
+> Registry：DockerHub  
+> Image：centos:centos7  
+
+Advanced container settings  
+Command & logging  
+> Command：/usr/sbin/init  
+
+点击Deploy the container（确保firewall处于运行状态）
+
+注意：使用Navicat连接mssql时，如有指定端口，主机需填成：ip,端口
