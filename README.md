@@ -531,3 +531,30 @@ Command & logging
 点击Deploy the container（确保firewall处于运行状态）
 
 注意：使用Navicat连接mssql时，如有指定端口，主机需填成：ip,端口
+
+#### 6.13 OpenProject
+https://hub.docker.com/r/openproject/community  
+拉取镜像（openproject/community:10）
+Containers->Add container  
+
+Name：容器名  
+
+Image configuration  
+> Registry：DockerHub  
+> Image：openproject/community:10  
+
+Network ports configuration  
+Manual network port publishing->publish a new network port  
+> host：外部访问端口，container：80  
+
+Advanced container settings  
+Volumes  
+Volume mapping->+map additional volume  
+> container：/var/lib/openproject/pgdata，volume：选择之前新建的Volume #需提前新建  
+> container：/var/lib/openproject/static，volume：选择之前新建的Volume #需提前新建  
+> 
+Env  
+Environment variables->add environment variable  
+> name：SECRET_KEY_BASE，value：secret  
+
+点击Deploy the container（确保firewall处于运行状态）
