@@ -558,3 +558,32 @@ Environment variables->add environment variable
 > name：SECRET_KEY_BASE，value：secret  
 
 点击Deploy the container（确保firewall处于运行状态）
+
+#### 6.14 禅道开源版
+> [官网文档](https://www.zentao.net/book/zentaopmshelp/405.html "官网文档")  
+
+https://hub.docker.com/r/easysoft/zentao  
+拉取镜像（easysoft/zentao:latest）默认latest为禅道开源最新版本
+Containers->Add container  
+
+Name：容器名  
+
+Image configuration  
+> Registry：DockerHub  
+> Image：easysoft/zentao:latest  
+
+Network ports configuration  
+Manual network port publishing->publish a new network port  
+> host：外部访问端口，container：80  
+
+Advanced container settings  
+Volumes  
+Volume mapping->+map additional volume  
+> container：/app/zentaopms，volume：选择之前新建的Volume #需提前新建  
+> container：/app/mysqldata，volume：选择之前新建的Volume #需提前新建  
+> 
+Env  
+Environment variables->add environment variable  
+> name：MYSQL_ROOT_PASSWORD，value：数据库密码  
+
+点击Deploy the container（确保firewall处于运行状态）
