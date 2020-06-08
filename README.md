@@ -587,3 +587,8 @@ Environment variables->add environment variable
 > name：MYSQL_ROOT_PASSWORD，value：数据库密码  
 
 点击Deploy the container（确保firewall处于运行状态）
+
+#### 6.15 Speedtest（局域网内网速测试）
+https://hub.docker.com/r/adolfintel/speedtest  
+拉取镜像（adolfintel/speedtest:latest）
+Containers->Add container  
