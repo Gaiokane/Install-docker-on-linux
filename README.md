@@ -1,15 +1,46 @@
-## Docker的安装与配置
-> #### 安装前准备（*Linux*）
-> #### 安装*Docker*
-> #### 配置*Docker*
-> #### 安装*Portainer*
-> #### 配置*Portainer*
+## Docker的安装配置与应用
 
-## 正文
-### 1. 安装前准备（*Linux*）
+> # <span id="home">目录</span>
+> 
+> * [1. 安装前准备（*Linux*）](#1)
+>   * [1.1 升级Bash](#1-1)
+>   * [1.2 更新系统](#1-2)
+> 
+> * [2. 安装*Docker*](#2)
+>   * [2.1 安装Docker](#2-1)
+> 
+> * [3. 配置*Docker*](#3)
+>   * [3.1 配置Docker](#3-1)
+> 
+> * [4. 安装*Portainer*](#4)
+>   * [4.1 安装Portainer](#4-1)
+>   * [4.2 安装web服务器（Apache）](#4-2)
+>   * [4.3 安装Portainer（使用阿里云镜像加速器）](#4-3)
+> 
+> * [5. 配置*Portainer*](#5)
+>   * [5.1 配置Portainer](#5-1)
+> 
+> * [6. 使用*Portainer*快速部署](#6)
+>   * [6.1 MariaDB](#6-1)
+>   * [6.2 MySQL](#6-2)
+>   * [6.3 Redis](#6-3)
+>   * [6.4 MongoDB](#6-4)
+>   * [6.5 WordPress](#6-5)
+>   * [6.6 Microsoft SQLServer Linux(2017)](#6-6)
+>   * [6.7 Microsoft SQLServer 2017](#6-7)
+>   * [6.8 Microsoft SQLServer 2019](#6-8)
+>   * [6.9 gitlab](#6-9)
+>   * [6.10 jenkins](#6-10)
+>   * [6.11 Caddy](#6-11)
+>   * [6.12 CentOS7](#6-12)
+>   * [6.13 OpenProject](#6-13)
+>   * [6.14 禅道开源版](#6-14)
+>   * [6.15 Speedtest（局域网内网速测试）](#6-15)
+
+<h1 id="1">1. 安装前准备（*Linux*）</h1>
 本环境中使用**CentOS7**安装与配置Docker等软件。  
 
-#### 1.1 升级Bash  
+<h2 id="1-1">1.1 升级Bash</h2>
 
 ##### 1.1.1 查看当前Bash版本
     bash --version
@@ -32,7 +63,9 @@ cd bash-4.4.tar.gz
 
     bash --version
 
-#### 1.2 更新系统  
+[返回目录](#home)
+
+<h2 id="1-2">1.2 更新系统</h2>
     yum -y update
 
 ##### 1.2.1 删除旧版内核  
@@ -45,10 +78,12 @@ rpm -q kernel
 yum remove kernel-3.10.0-1062.el7.x86_64
 ````
 
-### 2. 安装*Docker*
-#### 2.1 安装Docker
+[返回目录](#home)
 
-##### 2.2.1 使用阿里云镜像源安装
+<h1 id="2">2. 安装*Docker*</h1>
+<h2 id="2-1">2.1 安装Docker</h2>
+
+##### 2.1.1 使用阿里云镜像源安装
 [参考链接](https://developer.aliyun.com/mirror/docker-ce "Docker CE 镜像")
 
 ````
@@ -82,8 +117,8 @@ systemctl enable docker.service
 # sudo yum -y install docker-ce-[VERSION]
 ````
 
-##### 2.2.1 配置 Docker 镜像站
-###### 2.2.1.1 使用中国科技大学的docker镜像源
+##### 2.1.2 配置 Docker 镜像站
+###### 2.1.2.1 使用中国科技大学的docker镜像源
 ````
 #在/etc/docker/daemon.json文件中添加下面参数
 #增加配置文件/etc/docker/daemon.json
@@ -94,7 +129,7 @@ systemctl enable docker.service
 sudo systemctl restart docker
 ````
 
-###### 2.2.1.2 使用阿里云镜像加速器
+###### 2.1.2.2 使用阿里云镜像加速器
 ````
 #登录阿里云并获取加速器地址
 https://cr.console.aliyun.com/cn-shanghai/instances/mirrors
@@ -109,14 +144,18 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 ````
 
+[返回目录](#home)
 
-### 3. 配置*Docker*
-#### 3.1 配置Docker
+<h1 id="3">3. 配置*Docker*</h1>
+<h2 id="3-1">3.1 配置Docker</h2>
+
 > [docker docs](https://docs.docker.com/reference/ "docker docs")
 
+[返回目录](#home)
 
-### 4. 安装*Portainer*
-#### 4.1 安装web服务器（nginx）
+<h1 id="4">4. 安装*Portainer*</h1>
+<h2 id="4-1">4.1 安装web服务器（nginx）</h2>
+
 ````
 #安装必备组件
 sudo yum install yum-utils
@@ -178,11 +217,14 @@ service nginx stop
 service nginx reload
 ````
 
-#### 4.2 安装web服务器（Apache）
+[返回目录](#home)
 
+<h2 id="4-2">4.2 安装web服务器（Apache）</h2>
 
+[返回目录](#home)
 
-#### 4.3 安装Portainer（使用阿里云镜像加速器）
+<h2 id="4-3">4.3 安装Portainer（使用阿里云镜像加速器）</h2>
+
 ````
 docker volume create portainer_data
 docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
@@ -191,17 +233,22 @@ http://ip:9000
 用户名密码admin 11111111
 ````
 
-### 5. 配置*Portainer*
-#### 5.1 配置Portainer
+[返回目录](#home)
+
+<h1 id="5">5. 配置*Portainer*</h1>
+<h2 id="5-1">5.1 配置Portainer</h2>
+
 ##### 5.1.2 Images
 左侧列表选择Images
 DockerHub镜像地址  
 https://hub.docker.com/search?type=image  
 根据Tags中的版本，下载对应镜像，如输入：mariadb:latest
 
+[返回目录](#home)
 
-### 6. 使用*Portainer*快速部署
-#### 6.1 MariaDB
+<h1 id="6">6. 使用*Portainer*快速部署</h1>
+<h2 id="6-1">6.1 MariaDB</h2>
+
 拉取镜像（mariadb:latest）
 Containers->Add container  
 
@@ -222,7 +269,10 @@ Environment variables->add environment variable
 
 点击Deploy the container（确保firewall处于运行状态）
 
-#### 6.2 MySQL
+[返回目录](#home)
+
+<h2 id="6-2">6.2 MySQL</h2>
+
 拉取镜像（mysql:5.7）
 Containers->Add container  
 
@@ -243,7 +293,10 @@ Environment variables->add environment variable
 
 点击Deploy the container（确保firewall处于运行状态）
 
-#### 6.3 Redis
+[返回目录](#home)
+
+<h2 id="6-3">6.3 Redis</h2>
+
 拉取镜像（redis:latest）
 Containers->Add container  
 
@@ -259,7 +312,10 @@ Manual network port publishing->publish a new network port
 
 点击Deploy the container（确保firewall处于运行状态）
 
-#### 6.4 MongoDB
+[返回目录](#home)
+
+<h2 id="6-4">6.4 MongoDB</h2>
+
 拉取镜像（mongo:lates）
 Containers->Add container  
 
@@ -275,7 +331,10 @@ Manual network port publishing->publish a new network port
 
 点击Deploy the container（确保firewall处于运行状态）
 
-#### 6.5 WordPress
+[返回目录](#home)
+
+<h2 id="6-5">6.5 WordPress</h2>
+
 以Stack形式配置
 首先拉取mysql（mysql:5.7）和wordpress（wordpress:latest）镜像
 
@@ -325,7 +384,10 @@ volumes:
   wordpress_data:
 ````
 
-#### 6.6 Microsoft SQLServer Linux(2017)
+[返回目录](#home)
+
+<h2 id="6-6">6.6 Microsoft SQLServer Linux(2017)</h2>
+
 https://hub.docker.com/r/microsoft/mssql-server-linux  
 https://docs.microsoft.com/zh-cn/sql/linux/quickstart-install-connect-docker?view=sql-server-ver15&pivots=cs1-bash  
 拉取镜像（microsoft/mssql-server-linux:latest）
@@ -354,7 +416,10 @@ Environment variables->add environment variable
 
 注意：使用Navicat连接mssql时，如有指定端口，主机需填成：ip,端口
 
-#### 6.7 Microsoft SQLServer 2017
+[返回目录](#home)
+
+<h2 id="6-7">6.7 Microsoft SQLServer 2017</h2>
+
 https://hub.docker.com/_/microsoft-mssql-server  
 拉取镜像（mcr.microsoft.com/mssql/server:2017-latest）
 Containers->Add container  
@@ -382,7 +447,10 @@ Environment variables->add environment variable
 
 注意：使用Navicat连接mssql时，如有指定端口，主机需填成：ip,端口
 
-#### 6.8 Microsoft SQLServer 2019
+[返回目录](#home)
+
+<h2 id="6-8">6.8 Microsoft SQLServer 2019</h2>
+
 https://hub.docker.com/_/microsoft-mssql-server  
 拉取镜像（mcr.microsoft.com/mssql/server:2019-latest）
 Containers->Add container  
@@ -410,11 +478,17 @@ Environment variables->add environment variable
 
 注意：使用Navicat连接mssql时，如有指定端口，主机需填成：ip,端口
 
-#### 6.9 gitlab
+[返回目录](#home)
+
+<h2 id="6-9">6.9 gitlab</h2>
+
 https://hub.docker.com/r/gitlab/gitlab-ce  
 拉取镜像（gitlab/gitlab-ce:latest）
 
-#### 6.10 jenkins
+[返回目录](#home)
+
+<h2 id="6-10">6.10 jenkins</h2>
+
 https://hub.docker.com/r/jenkins/jenkins  
 > 长期支持版本 (LTS)：jenkins/jenkins:lts  
 > LTS (长期支持) 版本每12周从常规版本流中选择，作为该时间段的稳定版本。  
@@ -482,7 +556,10 @@ FAQ：
 > ```
 > 保存、退出、在Containers中重启容器  
 
-#### 6.11 Caddy
+[返回目录](#home)
+
+<h2 id="6-11">6.11 Caddy</h2>
+
 https://hub.docker.com/_/caddy  
 
 新建数据卷  
@@ -513,7 +590,10 @@ Volume mapping->+map additional volume
 
 点击Deploy the container（确保firewall处于运行状态）
 
-#### 6.12 CentOS7
+[返回目录](#home)
+
+<h2 id="6-12">6.12 CentOS7</h2>
+
 https://hub.docker.com/_/centos  
 拉取镜像（centos:centos7）
 Containers->Add container  
@@ -532,7 +612,10 @@ Command & logging
 
 注意：使用Navicat连接mssql时，如有指定端口，主机需填成：ip,端口
 
-#### 6.13 OpenProject
+[返回目录](#home)
+
+<h2 id="6-13">6.13 OpenProject</h2>
+
 https://hub.docker.com/r/openproject/community  
 拉取镜像（openproject/community:10）
 Containers->Add container  
@@ -559,7 +642,10 @@ Environment variables->add environment variable
 
 点击Deploy the container（确保firewall处于运行状态）
 
-#### 6.14 禅道开源版
+[返回目录](#home)
+
+<h2 id="6-14">6.14 禅道开源版</h2>
+
 > [官网文档](https://www.zentao.net/book/zentaopmshelp/405.html "官网文档")  
 
 https://hub.docker.com/r/easysoft/zentao  
@@ -588,7 +674,12 @@ Environment variables->add environment variable
 
 点击Deploy the container（确保firewall处于运行状态）
 
-#### 6.15 Speedtest（局域网内网速测试）
+[返回目录](#home)
+
+<h2 id="6-15">6.15 Speedtest（局域网内网速测试）</h2>
+
 https://hub.docker.com/r/adolfintel/speedtest  
 拉取镜像（adolfintel/speedtest:latest）
 Containers->Add container  
+
+[返回目录](#home)
