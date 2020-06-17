@@ -36,6 +36,7 @@
 >   * [6.13 OpenProject](#6-13)
 >   * [6.14 禅道开源版](#6-14)
 >   * [6.15 Speedtest（局域网内网速测试）](#6-15)
+>   * [6.16 Nginx](#6-16)
 
 <h1 id="1">1. 安装前准备（*Linux*）</h1>
 本环境中使用**CentOS7**安装与配置Docker等软件。  
@@ -335,7 +336,7 @@ Manual network port publishing->publish a new network port
 
 <h2 id="6-5">6.5 WordPress</h2>
 
-以Stack形式配置
+以Stack形式部署
 首先拉取mysql（mysql:5.7）和wordpress（wordpress:latest）镜像
 
 ````yml
@@ -678,8 +679,38 @@ Environment variables->add environment variable
 
 <h2 id="6-15">6.15 Speedtest（局域网内网速测试）</h2>
 
-https://hub.docker.com/r/adolfintel/speedtest  
-拉取镜像（adolfintel/speedtest:latest）
-Containers->Add container  
+[返回目录](#home)
+
+<h2 id="6-16">6.16 Nginx</h2>
+
+<h3 id="6-16-1">6.16.1 拉取镜像</h3>
+
+nginx:stable
+
+<h3 id="6-16-2">6.16.2 部署前准备</h3>
+
+新建数据卷
+
+Volumes->Add volume  
+
+> Name：nginx_file（数据卷名），存放nginx配置文件（nginx安装路径/etc/nginx）
+> Name：nginx_data（数据卷名），存放网站路径（nginx默认网站路径/usr/share/nginx）
+
+点击Create the volume
+
+<h3 id="6-16-3">6.16.3 开始部署</h3>
+
+以Stack形式部署
+
+````yml
+web:
+  image: nginx:stable             #拉取的镜像Tag，若本地没有镜像，则拉取
+  #container_name: nginx          #指定容器名
+  volumes:
+   - nginx_file:/etc/nginx        #:左侧为6.16.2中新建的数据卷名称，右侧为容器中对应路径
+   - nginx_data:/usr/share/nginx  #:左侧为6.16.2中新建的数据卷名称，右侧为容器中对应路径
+  ports:
+   - "107:80"                     #:左侧为外部访问端口，右侧为容器内端口
+````
 
 [返回目录](#home)
