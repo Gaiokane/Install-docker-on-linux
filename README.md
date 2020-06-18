@@ -679,6 +679,26 @@ Environment variables->add environment variable
 
 <h2 id="6-15">6.15 Speedtest（局域网内网速测试）</h2>
 
+> [官网GitHub](https://github.com/librespeed/speedtest "官网GitHub")  
+
+https://hub.docker.com/r/adolfintel/speedtest  
+拉取镜像（adolfintel/speedtest:latest）  
+Containers->Add container  
+
+Name：容器名  
+
+Image configuration  
+> Registry：DockerHub  
+> Image：adolfintel/speedtest:latest
+
+Network ports configuration  
+Manual network port publishing->publish a new network port  
+> host：外部访问端口，container：80  
+
+点击Deploy the container（确保firewall处于运行状态）
+
+注：若在虚拟机中部署的docker，且网络使用NAT，需要在虚拟机网络中配置端口转发
+
 [返回目录](#home)
 
 <h2 id="6-16">6.16 Nginx</h2>
