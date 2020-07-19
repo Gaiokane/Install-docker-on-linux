@@ -13,8 +13,8 @@
 >   * [3.1 配置Docker](#3-1)
 > 
 > * [4. 安装*Portainer*](#4)
->   * [4.1 安装Portainer](#4-1)
->   * [4.2 安装web服务器（Apache）](#4-2)
+>   * [4.1 安装web服务器（Nginx）（不需要）](#4-1)
+>   * [4.2 安装web服务器（Apache）（不需要）](#4-2)
 >   * [4.3 安装Portainer（使用阿里云镜像加速器）](#4-3)
 > 
 > * [5. 配置*Portainer*](#5)
@@ -155,7 +155,7 @@ sudo systemctl restart docker
 [返回目录](#home)
 
 <h1 id="4">4. 安装*Portainer*</h1>
-<h2 id="4-1">4.1 安装web服务器（nginx）</h2>
+<h2 id="4-1">4.1 安装web服务器（Nginx）（不需要）</h2>
 
 ````
 #安装必备组件
@@ -220,7 +220,7 @@ service nginx reload
 
 [返回目录](#home)
 
-<h2 id="4-2">4.2 安装web服务器（Apache）</h2>
+<h2 id="4-2">4.2 安装web服务器（Apache）（不需要）</h2>
 
 [返回目录](#home)
 
