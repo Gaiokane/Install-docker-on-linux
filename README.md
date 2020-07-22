@@ -239,7 +239,7 @@ http://ip:9000
 <h1 id="5">5. 配置*Portainer*</h1>
 <h2 id="5-1">5.1 配置Portainer</h2>
 
-##### 5.1.2 Images
+##### 5.1.1 Images
 左侧列表选择Images
 DockerHub镜像地址  
 https://hub.docker.com/search?type=image  
